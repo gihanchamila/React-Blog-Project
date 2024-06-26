@@ -34,12 +34,23 @@ const Signup = () => {
         setLoading(true)
 
         //api request
-        
+
+        const requestBody = {
+          name : formData.name,
+          email : formData.email,
+          password : formData.password
+        }
+
+        const response = await axios.post("http://localhost:8000/api/v1/auth/signup", requestBody)
+        console.log(response)
+        setFormData(initialFormData)
+        setFormError(initialFormError)
+        setLoading(false)
+
       }catch(error){
         setLoading(false)
         console.log(error.message)
       }
-      setFormError(initialFormError)
     }
 
     console.log(formData)
@@ -102,7 +113,7 @@ const Signup = () => {
         </div>
 
         <div className="form-group">
-          <input className="button" type="submit" value="Signup" />
+          <input className="button" type="submit" value ={`${loading ? "Saving..." : "Signup"}`} />
         </div>
       </form>
     </div>
