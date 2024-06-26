@@ -1,5 +1,7 @@
 import { useState } from "react";
-import axios from "axios";
+import { useNavigate } from "react-router-dom";
+import axios from "../utils/axiosInstance"
+import { toast } from "react-toastify";
 import signupValidator from "../validators/signupValidator";
 
 const initialFormData = {name: "", email: "", password: "", confirmPassword: ""};
@@ -10,6 +12,8 @@ const Signup = () => {
   const [formData, setFormData] = useState(initialFormData)
   const [formError, setFormError] = useState(initialFormError)
   const [loading, setLoading] = useState(false)
+
+  const navigate = useNavigate()
 
   const handleChange = (e) => {
     setFormData((prev) => ({...prev, [e.target.name]: e.target.value}))
@@ -41,15 +45,30 @@ const Signup = () => {
           password : formData.password
         }
 
-        const response = await axios.post("http://localhost:8000/api/v1/auth/signup", requestBody)
+        const response = await axios.post("/auth/signup", requestBody)
+        const data = response.data 
         console.log(response)
+
+        toast.success(data.message, {
+          position: "top-right",
+          autoClose: true,
+        })
+
         setFormData(initialFormData)
         setFormError(initialFormError)
         setLoading(false)
 
+        navigate("/login")
+
       }catch(error){
         setLoading(false)
-        console.log(error.message)
+        const response = error.response
+        const data = response.data
+        toast.error(data.message,  {
+          position: "top-right",
+          autoClose: true,
+        });
+
       }
     }
 
@@ -77,7 +96,7 @@ const Signup = () => {
           <label>Email</label>
           <input
             className="form-control"
-            type="text"
+            type="email"
             name="email"
             placeholder="doe@gmail.com"
             value={formData.email}
