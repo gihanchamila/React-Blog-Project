@@ -2,6 +2,7 @@ import { useState } from "react";
 import axios from "../utils/axiosInstance"
 import { toast } from "react-toastify";
 import loginValidator from "../validators/loginValidator"
+import { useNavigate } from "react-router-dom";
 
 const initialFormData = {email: "", password: ""};
 const initialFormError = {email: "", password: ""}
@@ -12,6 +13,8 @@ const Login = () => {
   const [formData, setFormData] = useState(initialFormData)
   const [formError, setFormError] = useState(initialFormError)
   const [loading, setLoading] = useState(false)
+
+  const navigate = useNavigate()
 
   const handleChange = (e) => {
     setFormData((prev) => ({...prev, [e.target.name]: e.target.value}))
@@ -48,6 +51,7 @@ const Login = () => {
         setFormData(initialFormData)
         setFormError(initialFormError)
         setLoading(false)
+        navigate("/")
 
       }catch(error){
         setLoading(false)
