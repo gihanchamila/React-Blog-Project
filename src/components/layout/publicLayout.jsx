@@ -1,9 +1,8 @@
-import React from 'react'
 import { Navigate, Outlet } from 'react-router-dom'
 import PublicNavBar from '../PublicNavBar'
-import { useAuth } from '../context/authContext'
+import { useAuth } from '../context/useAuth'
 
-const publicLayout = () => {
+const PublicLayout = () => {
     const auth = useAuth()
 
     if(!auth){
@@ -18,4 +17,4 @@ const publicLayout = () => {
   )
 }
 
-export default publicLayout
+export default PublicLayout

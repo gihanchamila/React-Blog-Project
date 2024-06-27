@@ -14,7 +14,7 @@ const Login = () => {
   const [formError, setFormError] = useState(initialFormError)
   const [loading, setLoading] = useState(false)
 
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   const handleChange = (e) => {
     setFormData((prev) => ({...prev, [e.target.name]: e.target.value}))
@@ -52,7 +52,7 @@ const Login = () => {
         setFormError(initialFormError)
         setLoading(false)
         navigate("/")
-
+        
       }catch(error){
         setLoading(false)
         const response = error.response
@@ -61,7 +61,6 @@ const Login = () => {
           position: "top-right",
           autoClose: true,
         });
-
       }
     }
 

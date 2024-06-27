@@ -3,16 +3,16 @@ import { useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify'
 
 const PrivateNavBar = () => {
+  const navigate = useNavigate();
 
   const handleLogout = () => {
-    const navigate = useNavigate
-    window.localStorage.removeItem("blogData")
+    window.localStorage.removeItem("blogData");
     toast.success("Logout successfull", {
-      position: "top-right",
+      position:"top-right",
       autoClose: true,
-    })
-    navigate("/login")
-  }
+    });
+    navigate("/login");
+  };
 
   return (
     <nav className='primary-link'>

@@ -1,11 +1,9 @@
-import React from 'react'
 import { Navigate, Outlet } from 'react-router-dom'
 import PrivateNavBar from '../PrivateNavBar'
-import { useAuth } from '../context/authContext'
+import { useAuth } from '../context/useAuth'
 
-const privateLayout = () => {
+const PrivateLayout = () => {
     const auth = useAuth()
-
     if(!auth){
         return <Navigate to="/login" />
     }
@@ -18,4 +16,4 @@ const privateLayout = () => {
   )
 }
 
-export default privateLayout
+export default PrivateLayout
