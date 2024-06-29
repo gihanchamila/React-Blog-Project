@@ -5,7 +5,7 @@ import { useAuth } from '../context/useAuth'
 const PublicLayout = () => {
     const auth = useAuth()
 
-    if(!auth){
+    if(auth){
         return <Navigate to="/" />
     }
 

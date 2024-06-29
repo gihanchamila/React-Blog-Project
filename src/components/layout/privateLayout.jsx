@@ -1,5 +1,5 @@
 import { Navigate, Outlet } from 'react-router-dom'
-import PrivateNavBar from '../PrivateNavBar'
+import PrivateNavBar from "../PrivateNavBar"
 import { useAuth } from '../context/useAuth'
 
 const PrivateLayout = () => {

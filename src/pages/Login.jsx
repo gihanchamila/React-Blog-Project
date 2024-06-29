@@ -41,7 +41,7 @@ const Login = () => {
         const response = await axios.post("/auth/signin", formData)
         const data = response.data 
         
-        window.localStorage.setItem("blogData", JSON.stringify(data.data))
+        window.localStorage.setItem("blogData", JSON.stringify(data.data));
 
         toast.success(data.message, {
           position: "top-right",
