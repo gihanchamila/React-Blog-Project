@@ -1,7 +1,27 @@
+import { useNavigate } from "react-router-dom";
+import { useState } from "react";
+import { toast } from "react-toastify";
+import axios from "../../utils/axiosInstance"
+
+onst initialFormData = {title: "", description: "", category: ""};
+const initialFormError = {title: "", category: ""}
+
+
 const NewPost = () => {
+
+  const [formData, setFormData] = useState(initialFormData)
+  const [formError, setFormError] = useState(initialFormError)
+  const [loading, setLoading] = useState(false)
+
+  const navigate = useNavigate()
+
+  const handleChange = (e) => {
+    setFormData((prev) => ({...prev, [e.target.name]: e.target.value}))
+  }
+
   return (
     <div>
-      <button className="button button-block">Go Back</button>
+      <button className="button button-block" onClick={() => {navigate(-1)}}>Go Back</button>
       <div className="form-container">
         <form className="inner-container">
           <h2 className="form-title">New Post</h2>
@@ -12,6 +32,8 @@ const NewPost = () => {
               type="text"
               name="title"
               placeholder="React blog post"
+              value={formData.title}
+              onChange={handleChange}
             />
           </div>
 
