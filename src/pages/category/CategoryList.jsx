@@ -1,5 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
+import { Modal, Button } from "react-bootstrap";
 import moment from "moment";
 import { toast } from "react-toastify";
 import axios from "../../utils/axiosInstance"
@@ -13,9 +14,11 @@ const CategoryList = () => {
   const [pageCount, setPageCount] = useState([])
   const [size, setSize] = useState(10)
   const [searchValue, setSearchValue] = useState("")
+  const [showModal, setShowModal] = useState(false)
+  const [categoryId, setCategoryId] = useState(null)
+
   const navigate = useNavigate()
   
-
   useEffect(() => {
 
     const getCategories = async () => {
@@ -25,12 +28,10 @@ const CategoryList = () => {
         setLoading(true)
 
         // api request
-        const response = await axios.get(`/category?page=${currentPage}&&size=${size}&&q=${searchValue}`)
+        const response = await axios.get(`/category?page=${currentPage}&size=${size}&q=${searchValue}`)
         const data = response.data.data
         setCategories(data.categories)
         setTotalPage(data.pages)
-        console.log(data)
-
         setLoading(false)
       }catch(error){
         setLoading(false)
@@ -46,20 +47,19 @@ const CategoryList = () => {
 
     getCategories()
 
-  }, [currentPage, size]);
+  }, [currentPage]);
 
   useEffect(() => {
     if(totalPage > 1){
       let tempPageCount = [];
 
       for(let i = 1; i <= totalPage; i++){
-        tempPageCount.push(i)
+        tempPageCount = [...tempPageCount, i];
       }
       setPageCount(tempPageCount)
     }else{
       setPageCount([])
     }
-    console.log(pageCount)
   }, [totalPage])
 
   const handlePrev = () => {
@@ -82,6 +82,7 @@ const CategoryList = () => {
     try{
 
       const input = e.target.value
+      setSearchValue(input);
 
       const response = await axios.get(`/category?q=${input}&page=${currentPage}`)
       const data = response.data.data 
@@ -95,6 +96,32 @@ const CategoryList = () => {
         position: "top-right",
         autoClose: true,
       });
+    }
+  }
+
+  const handleDelete = async () => {
+    try{
+      const response = await axios.delete(`/category/${categoryId}`);
+      setShowModal(false)
+      const data = response.data
+      toast.success(data.message,  {
+        position: "top-right",
+        autoClose: true,
+      });
+
+      const response2 = await axios.get(`/category?page=${currentPage}&size=${size}&q=${searchValue}`)
+      const data2 = response2.data.data
+      setCategories(data2.categories)
+      setTotalPage(data2.pages)
+
+    }catch(error){
+      setShowModal(false)
+      const response = error.response
+      const data = response.data
+      toast.error(data.message,  {
+        position: "top-right",
+        autoClose: true,
+    });
     }
   }
 
@@ -168,8 +195,27 @@ const CategoryList = () => {
         <button className="pag-button" onClick={handleNext} disabled={currentPage === totalPage}>next</button>
       </div>
       )}
+      <Modal show={showModal} onHide={() => {
+        setShowModal(false)
+        setCategoryId(null)
+        }}>
+        <Modal.Header closeButton={true}>
+          <Modal.Title>Are you sure you want to delete?</Modal.Title>
+        </Modal.Header>
+        <Modal.Footer>
+          <div style={{margin : "0"}}> 
+            <Button className="no-button" onClick={() => {
+              setShowModal(false)
+              setCategoryId(null)
+              }}>No</Button>
+            <Button className="yes-button" onClick={handleDelete}>Yes</Button>
+          </div>
+        </Modal.Footer>
+      </Modal>
     </div>
   );
 };
+
+
 
 export default CategoryList;

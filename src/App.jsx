@@ -1,6 +1,7 @@
 import { Routes, Route } from "react-router-dom";
 import "react-toastify/ReactToastify.css"
 import { ToastContainer } from "react-toastify";
+import 'bootstrap/dist/css/bootstrap.min.css';
 import Home from "./pages/Home";
 import PrivateLayout from "./components/layout/PrivateLayout";
 import PublicLayout from "./components/layout/PublicLayout"
@@ -21,7 +22,7 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="categories" element={<CategoryList />} />
           <Route path="categories/new-category" element={<NewCategory />} />
-          <Route path="categories/update-category" element={<UpdateCategory />} />
+          <Route path="categories/update-category/:id" element={<UpdateCategory />} />
           <Route path="posts" element={<PostList />} />
           <Route path="profile" element={<Profile />} />
           <Route path="setting" element={<Setting />} />
