@@ -1,5 +1,3 @@
-
-
 const addCategoryValidator = ({title}) => {
 
     const errors = {
