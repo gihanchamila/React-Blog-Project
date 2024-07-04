@@ -22,8 +22,8 @@ const UpdateCategory = () => {
     if(categoryId){
       const getCategory = async() => {
       try{
-        //api request
 
+        //api request
         const response = await axios.get(`/category/${categoryId}`)
         const data = response.data.data
 
@@ -31,8 +31,6 @@ const UpdateCategory = () => {
             title : data.category.title, 
             description : data.category.description
         })
-
-        console.log(data)
       }catch(error){
         const response = error.response
         const data = response.data
@@ -44,13 +42,11 @@ const UpdateCategory = () => {
       }
       getCategory()
     }
-    
-
   }, [categoryId])
 
   const handleChange = (e) => {
     setFormData((prev) => ({...prev, [e.target.name]: e.target.value}))
-  }
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -87,7 +83,7 @@ const UpdateCategory = () => {
         });
       }
     }
-  }
+  };
 
   console.log(categoryId)
 
@@ -122,7 +118,7 @@ const UpdateCategory = () => {
           </div>
 
           <div className="form-group">
-            <input className="button" type="submit" value={`${loading ? "updating" : "update"}`} />
+            <input className="button" type="submit" value={`${loading ? "updating..." : "update"}`} />
           </div>
         </form>
       </div>

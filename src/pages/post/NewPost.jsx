@@ -26,6 +26,7 @@ const NewPost = () => {
   const [extensionError, setExtensionError] = useState(null);
   const [fileId, setFileId] = useState(null);
   const [isDisable, setIsDisable] = useState(false);
+  
 
 
 
