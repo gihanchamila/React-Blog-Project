@@ -25,7 +25,6 @@ const Home = () => {
         setPosts(data.posts)
         setTotalPage(data.pages)
         setLoading(false)
-
         console.log(data)
       }catch(error){
         setLoading(false)

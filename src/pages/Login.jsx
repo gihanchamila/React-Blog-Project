@@ -55,6 +55,7 @@ const Login = () => {
         
       }catch(error){
         setLoading(false)
+        setFormError(initialFormError)
         const response = error.response
         const data = response.data
         toast.error(data.message,  {
