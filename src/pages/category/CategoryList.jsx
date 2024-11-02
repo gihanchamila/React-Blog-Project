@@ -188,11 +188,11 @@ const CategoryList = () => {
       )}
       {pageCount.length > 0 && (
         <div className="pag-container">
-        <button className="pag-button" onClick={handlePrev} disabled={currentPage === 1}>prev</button>
-        {pageCount.map((pageNumber, index) => (
-          <button className="pag-button" key={index} onClick={() => handlePage(pageNumber)} style={{backgroundColor : currentPage === pageNumber ? "#ccc" : ""}}>{pageNumber}</button>
-        ))}
-        <button className="pag-button" onClick={handleNext} disabled={currentPage === totalPage}>next</button>
+          <button className="pag-button" onClick={handlePrev} disabled={currentPage === 1}>prev</button>
+          {pageCount.map((pageNumber, index) => (
+            <button className="pag-button" key={index} onClick={() => handlePage(pageNumber)} style={{backgroundColor : currentPage === pageNumber ? "#ccc" : ""}}>{pageNumber}</button>
+          ))}
+          <button className="pag-button" onClick={handleNext} disabled={currentPage === totalPage}>next</button>
       </div>
       )}
       <Modal show={showModal} onHide={() => {

@@ -24,8 +24,6 @@ const UpdatePost = () => {
     if(postId){
       const getPost = async() => {
       try{
-
-        //api request
         const response = await axios.get(`/posts/${postId}`)
         const data = response.data.data
 
@@ -155,6 +153,7 @@ const UpdatePost = () => {
       <div className="form-container">
         <form className="inner-container" onSubmit={handleSubmit}>
           <h2 className="form-title">Update Post</h2>
+
           <div className="form-group">
             <label>Title</label>
             <input

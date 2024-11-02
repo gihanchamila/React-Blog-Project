@@ -115,7 +115,6 @@ const PostList = () => {
           ))
         }
       </div>
-
       {pageCount.length > 0 && (
         <div className="pag-container">
         <button className="pag-button" onClick={handlePrev} disabled={currentPage === 1}>prev</button>
